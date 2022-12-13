@@ -19,6 +19,11 @@ public class Repo {
     }
 
     public void delete(int id) {
+
+        if ((findById(id)) == null) {
+            throw new NotFoundException(id);
+        }
+
         Product[] tmp = new Product[products.length - 1];
         int i = 0;
 
@@ -29,6 +34,15 @@ public class Repo {
             }
         }
         products = tmp;
+    }
+
+    public Product findById(int id) {
+        for (Product product: products){
+            if (product.getId() == id){
+                return product;
+            }
+        }
+        return null;
     }
 
 }
